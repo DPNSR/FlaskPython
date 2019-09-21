@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>showdata</title>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-- >
+</head>
+<body>
+  <div>
+    {%with messages=get_flashed_messages()%}
+    {%if messages%}
+      {%for msg in messages%}
+      <h3>{{Msg}}</h3>
+      {%endfor%}
+    {%endif%}
+    {%endwith%}
+  </div>
+
+  <div>
+    {%if current_user.is_authenticated:%}
+    <button><a href="{{url_for('index1')}}">Goto index page</button>
+    {%else%}
+  </div>
+  <div class="container">
+   Hello User!!!! Welcome
+   <table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in reg %}
+      <tr>
+        <td>{{r.id}}</td>
+        <td>{{r.name}}</td>
+        <td>{{r.email}}</td>
+        <td>{{r.pass}}</td>
+        <td><a href="{{url_for('editData',register_id=r.id)}}">Edit Data</a>
+        </td>
+        <td><a href="{{url_for('deleteData',register_id=r.id)}}">Delete Data</a></td>
+  
+      </tr>
+       {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {%endif%}
+  <button><a href="{{url_for('addData')}}">Add Data</a></button>
+<!--  <div>
+    {%if current_user.is_authenticated:%}
+    <button><a href="{{url_for('index1')}}">Go to Index</a></button>
+    {%endif%}
+  </div> -- >
+</body>
+</html>
